@@ -1,14 +1,14 @@
-employee_id,employee_name,bank_account,gross_pay,deductions,net_pay,previous_net_pay,status,termination_date,pay_period_end
-EMP-1001,Aisha Al-Dossari,SA-1101,18500,2100,16400,16350,Active,,2026-07-31
-EMP-1002,Khalid Al-Mutairi,SA-1102,14000,1400,12600,12600,Active,,2026-07-31
-EMP-1003,Sara Al-Qahtani,SA-1103,12000,1200,10800,10750,Active,,2026-07-31
-EMP-1004,Fahad Karim,SA-1104,9500,950,8550,8500,Active,,2026-07-31
-EMP-1005,Nora Salem,SA-1105,11000,1100,9900,9800,Active,,2026-07-31
-EMP-1006,Majed Youssef,SA-1105,20000,2500,17500,17400,Active,,2026-07-31
-EMP-1007,Huda Aziz,SA-1107,8000,800,7200,7200,Active,,2026-07-31
-EMP-1007,Huda Aziz,SA-1113,8000,800,7200,7200,Active,,2026-07-31
-EMP-1008,Yousef Saleh,SA-1108,10500,1000,11000,9500,Active,,2026-07-31
-EMP-1009,Lina Faris,SA-1109,13000,1400,-500,11550,Active,,2026-07-31
-EMP-1010,Rana Nasser,SA-1110,21000,2900,18100,8100,Active,,2026-07-31
-EMP-1011,Maha Al-Harbi,SA-1111,16000,1800,14200,14100,Terminated,2026-06-30,2026-07-31
-EMP-1012,Ziad Omar,,12500,1200,11300,11200,Active,,2026-07-31
+employee_id,employee_name,bank_account,gross_pay,deductions,net_pay,previous_net_pay,status,termination_date,pay_period_end,variance_reason
+EMP-1001,Aisha Al-Dossari,SA-1101,18500,2100,16400,16350,Active,,2026-07-31,
+EMP-1002,Khalid Al-Mutairi,SA-1102,14000,1400,12600,12600,Active,,2026-07-31,
+EMP-1003,Sara Al-Qahtani,SA-1103,12000,1200,10800,10750,Active,,2026-07-31,
+EMP-1004,Fahad Karim,SA-1104,9500,950,8550,8500,Active,,2026-07-31,
+EMP-1005,Nora Salem,SA-1105,11000,1100,9900,9800,Active,,2026-07-31,
+EMP-1006,Majed Youssef,SA-1105,20000,2500,17500,17400,Active,,2026-07-31,
+EMP-1007,Huda Aziz,SA-1107,8000,800,7200,7200,Active,,2026-07-31,
+EMP-1007,Huda Aziz,SA-1113,8000,800,7200,7200,Active,,2026-07-31,
+EMP-1008,Yousef Saleh,SA-1108,10500,1000,11000,9500,Active,,2026-07-31,
+EMP-1009,Lina Faris,SA-1109,13000,1400,-500,11550,Active,,2026-07-31,
+EMP-1010,Rana Nasser,SA-1110,21000,2900,18100,8100,Active,,2026-07-31,Annual leave salary paid in advance
+EMP-1011,Maha Al-Harbi,SA-1111,16000,1800,14200,14100,Terminated,2026-06-30,2026-07-31,
+EMP-1012,Ziad Omar,,12500,1200,11300,11200,Active,,2026-07-31,
