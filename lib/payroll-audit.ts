@@ -106,6 +106,11 @@ export function rowsToCsv(rows: PayrollRow[]) {
   return HEADERS.join(",") + "\n" + lines.join("\n");
 }
 
+export function excelCompatibleCsv(text: string) {
+  const windowsLines = text.replace(/\r?\n/g, "\r\n");
+  return "\uFEFFsep=,\r\n" + windowsLines;
+}
+
 function normalizeHeader(value: string) {
   return value
     .replace(/^\uFEFF/, "")
@@ -228,7 +233,10 @@ export function parsePayrollTable(inputRows: readonly (readonly unknown[])[]) {
 }
 
 export function parsePayrollCsv(text: string) {
-  return parsePayrollTable(tokenizeCsv(text));
+  const rows = tokenizeCsv(text);
+  const firstCell = rows[0]?.[0]?.replace(/^\uFEFF/, "").trim().toLowerCase();
+  if (firstCell === "sep=") rows.shift();
+  return parsePayrollTable(rows);
 }
 
 export function analyzePayroll(rows: PayrollRow[]) {

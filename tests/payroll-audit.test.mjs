@@ -4,6 +4,7 @@ import test from "node:test";
 import {
   analyzePayroll,
   DEMO_ROWS,
+  excelCompatibleCsv,
   parsePayrollCsv,
   parsePayrollTable,
 } from "../lib/payroll-audit.ts";
@@ -81,6 +82,16 @@ test("CSV parser accepts aliases and accounting negatives", () => {
   assert.equal(rows[0].employeeId, "E-1");
   assert.equal(rows[0].netPay, -500);
   assert.equal(rows[0].varianceReason, "Recovery adjustment");
+});
+
+test("Excel-friendly CSV opens in columns and can be uploaded again", () => {
+  const csv = excelCompatibleCsv([
+    "employee_id,gross_pay,deductions,net_pay",
+    "E-EXCEL,10000,1000,9000",
+  ].join("\n"));
+
+  assert.match(csv, /^\uFEFFsep=,\r\n/);
+  assert.equal(parsePayrollCsv(csv)[0].employeeId, "E-EXCEL");
 });
 
 test("Excel-style table parser normalizes dates and numeric cells", () => {

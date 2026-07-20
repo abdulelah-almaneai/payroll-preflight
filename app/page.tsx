@@ -7,6 +7,7 @@ import {
   AUDIT_RULES,
   csvCell,
   DEMO_ROWS,
+  excelCompatibleCsv,
   formatSar,
   parsePayrollCsv,
   parsePayrollTable,
@@ -18,7 +19,7 @@ import {
 type Filter = "All" | Severity;
 
 function downloadText(filename: string, text: string) {
-  const blob = new Blob([text], { type: "text/csv;charset=utf-8" });
+  const blob = new Blob([excelCompatibleCsv(text)], { type: "text/csv;charset=utf-8" });
   const url = window.URL.createObjectURL(blob);
   const link = document.createElement("a");
   link.href = url;

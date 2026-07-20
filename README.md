@@ -43,7 +43,8 @@ decision.
 - Checks payments against employee status and termination date.
 - Identifies missing bank-account details.
 - Filters and searches findings by employee, rule, or severity.
-- Exports a findings CSV and copies a concise review note for the payroll owner.
+- Exports an Excel-friendly findings CSV and copies a concise review note for
+  the payroll owner.
 
 ## Audit rules
 
