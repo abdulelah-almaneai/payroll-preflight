@@ -226,7 +226,7 @@ export function buildExcelAuditReport({
       data: summary,
       columns: [{ width: 27 }, { width: 36 }, { width: 27 }, { width: 44 }],
       showGridLines: false,
-      zoomScale: 95,
+      zoomScale: 0.95,
     },
     {
       sheet: "Findings Log",
@@ -239,7 +239,7 @@ export function buildExcelAuditReport({
       stickyRowsCount: 1,
       showGridLines: false,
       orientation: "landscape",
-      zoomScale: 75,
+      zoomScale: 0.75,
     },
     {
       sheet: "Audit Rules",
@@ -247,7 +247,7 @@ export function buildExcelAuditReport({
       columns: [{ width: 16 }, { width: 30 }, { width: 78 }],
       stickyRowsCount: 1,
       showGridLines: false,
-      zoomScale: 90,
+      zoomScale: 0.9,
     },
   ];
 

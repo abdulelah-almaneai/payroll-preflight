@@ -22,6 +22,8 @@ test("Excel audit report contains summary, annual findings log, and audit rules"
   assert.equal(report.fileName, "payroll-preflight-audit-2026-07-31.xlsx");
   assert.equal(report.sheets.length, 3);
   assert.deepEqual(report.sheets.map((sheet) => sheet.sheet), ["Summary", "Findings Log", "Audit Rules"]);
+  assert.deepEqual(report.sheets.map((sheet) => sheet.zoomScale), [0.95, 0.75, 0.9]);
+  assert.ok(report.sheets.every((sheet) => sheet.zoomScale >= 0.1 && sheet.zoomScale <= 4));
 
   const buffer = await writeExcelFile(report.sheets).toBuffer();
   assert.ok(buffer.byteLength > 5_000);
