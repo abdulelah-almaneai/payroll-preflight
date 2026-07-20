@@ -2,6 +2,7 @@
 
 import { useMemo, useRef, useState } from "react";
 import type { ChangeEvent, DragEvent } from "react";
+import { buildExcelAuditReport } from "@/lib/excel-report";
 import {
   analyzePayroll,
   AUDIT_RULES,
@@ -38,6 +39,7 @@ export default function Home() {
   const [query, setQuery] = useState("");
   const [error, setError] = useState("");
   const [copied, setCopied] = useState(false);
+  const [isExportingExcel, setIsExportingExcel] = useState(false);
   const fileInput = useRef<HTMLInputElement>(null);
 
   const analysis = useMemo(() => analyzePayroll(rows), [rows]);
@@ -105,6 +107,20 @@ export default function Home() {
         .join(",")
     );
     downloadText("payroll-preflight-findings.csv", header.join(",") + "\n" + lines.join("\n"));
+  };
+
+  const exportExcelReport = async () => {
+    setIsExportingExcel(true);
+    setError("");
+    try {
+      const report = buildExcelAuditReport({ rows, analysis, sourceFile: fileName });
+      const writeExcelFile = (await import("write-excel-file/browser")).default;
+      await writeExcelFile(report.sheets).toFile(report.fileName);
+    } catch (reason) {
+      setError(reason instanceof Error ? reason.message : "The Excel audit report could not be created.");
+    } finally {
+      setIsExportingExcel(false);
+    }
   };
 
   const copyReviewNote = async () => {
@@ -339,9 +355,9 @@ export default function Home() {
             <p className="eyebrow">Release workflow</p>
             <h3>Turn findings into a controlled decision.</h3>
             <p>
-              Export the audit trail or copy a concise review note for the
-              payroll owner. Resolve findings, document approval, then run the
-              file again before release.
+              Export a workflow-ready Excel report, a CSV integration file, or
+              a concise review note for the payroll owner. Resolve findings,
+              document approval, then run the file again before release.
             </p>
           </div>
           <ol className="review-steps">
@@ -351,8 +367,16 @@ export default function Home() {
             <li><span>4</span>Release only when the decision is ready</li>
           </ol>
           <div className="review-actions">
-            <button className="button primary" type="button" onClick={exportFindings} disabled={!totalFindings}>
-              Export findings CSV
+            <button
+              className="button primary"
+              type="button"
+              onClick={() => void exportExcelReport()}
+              disabled={!rows.length || isExportingExcel}
+            >
+              {isExportingExcel ? "Preparing Excel report…" : "Export Excel report"}
+            </button>
+            <button className="button secondary" type="button" onClick={exportFindings} disabled={!totalFindings}>
+              Export CSV for integration
             </button>
             <button className="button secondary" type="button" onClick={() => void copyReviewNote()}>
               {copied ? "Review note copied" : "Copy review note"}
