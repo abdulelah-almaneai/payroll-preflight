@@ -62,7 +62,9 @@ export default function Home() {
     try {
       const parsed = isCsv
         ? parsePayrollCsv(await file.text())
-        : parsePayrollTable(await (await import("read-excel-file/browser")).readSheet(file));
+        : parsePayrollTable(
+          await (await import("read-excel-file/browser")).readSheet(file, { trim: false }),
+        );
       setRows(parsed);
       setFileName(file.name);
       setIsDemo(false);

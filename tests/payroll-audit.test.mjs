@@ -94,12 +94,13 @@ test("Excel-friendly CSV opens in columns and can be uploaded again", () => {
   assert.equal(parsePayrollCsv(csv)[0].employeeId, "E-EXCEL");
 });
 
-test("Excel-style table parser normalizes dates and numeric cells", () => {
+test("Excel-style table parser normalizes dates, numeric cells, and blanks", () => {
   const rows = parsePayrollTable([
-    ["employee_id", "gross_pay", "deductions", "net_pay", "pay_period_end"],
-    ["E-2", 12000, 1200, 10800, new Date("2026-07-31T00:00:00.000Z")],
+    ["employee_id", "employee_name", "gross_pay", "deductions", "net_pay", "pay_period_end"],
+    ["E-2", null, 12000, 1200, 10800, new Date("2026-07-31T00:00:00.000Z")],
   ]);
 
+  assert.equal(rows[0].employeeName, "E-2");
   assert.equal(rows[0].grossPay, 12000);
   assert.equal(rows[0].payPeriodEnd, "2026-07-31");
 });
