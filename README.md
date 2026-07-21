@@ -43,8 +43,10 @@ decision.
 - Checks payments against employee status and termination date.
 - Identifies missing bank-account details.
 - Filters and searches findings by employee, rule, or severity.
-- Exports an Excel-friendly findings CSV and copies a concise review note for
-  the payroll owner.
+- Exports a formatted Excel audit workbook with **Summary**, **Findings Log**,
+  and **Audit Rules** worksheets.
+- Exports an Excel-friendly CSV for downstream integration and copies a concise
+  review note for the payroll owner.
 
 ## Audit rules
 
@@ -125,6 +127,7 @@ Use the **Download sample CSV** action in the app or
 - React 19
 - TypeScript
 - `read-excel-file`
+- `write-excel-file`
 - Next.js / Vinext
 - OpenAI Sites
 - Browser File and Blob APIs
@@ -145,7 +148,10 @@ Then open the local address displayed by the development server.
    **HOLD** decision.
 3. Download the sample CSV, optionally save it as an Excel `.xlsx` workbook,
    and upload it through **Audit a payroll file**.
-4. Filter the findings, export the findings CSV, and copy the review note.
+4. Filter and search the findings.
+5. Export the formatted Excel audit report and confirm the **Summary**,
+   **Findings Log**, and **Audit Rules** worksheets.
+6. Export the findings CSV for integration and copy the review note.
 5. Run the automated audit-rule and production-build checks:
 
 ```bash
