@@ -1,0 +1,46 @@
+# ============================================================================
+# Payroll Preflight — GitHub Actions Test Runner
+# ----------------------------------------------------------------------------
+# يشغّل اختبارات محرك التدقيق تلقائياً عند كل تعديل على فرع main.
+# - يستخدم Node.js 24 (يدعم TypeScript type stripping مباشرة).
+# - يتعامل مع وجود أو غياب package-lock.json.
+# - يمكن تشغيله يدوياً من تبويب Actions (زر Run workflow).
+# ============================================================================
+
+name: Payroll Preflight — Test Suite
+
+on:
+  push:
+    branches: [ main ]
+  pull_request:
+    branches: [ main ]
+  workflow_dispatch:
+
+jobs:
+  test:
+    name: Node.js 24 — Run test suite
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js 24
+        uses: actions/setup-node@v4
+        with:
+          node-version: "24"
+
+      - name: Show Node.js version
+        run: node --version
+
+      - name: Install dependencies
+        run: |
+          if [ -f package-lock.json ]; then
+            npm ci
+          else
+            npm install --no-audit --no-fund
+          fi
+
+      - name: Run tests
+        run: npm test
